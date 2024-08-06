@@ -422,7 +422,10 @@ function App() {
           </svg>
         </div>
       </div>
-      <div class="absolute right-1 bottom-1 select-none pointer-events-none font-bold" style="filter: invert(100%)">
+      <div
+        class="absolute right-1 bottom-1 select-none pointer-events-none font-bold opacity-25"
+        style="filter: invert(100%)"
+      >
         Special Thanks to Lucas Kang
       </div>
     </div>
