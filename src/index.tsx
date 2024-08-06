@@ -32,7 +32,7 @@ function App() {
       case "Very Hard":
         return 4.4;
       case "Impossible":
-        return 4.6;
+        return 4.5;
       default:
         return 4.0;
     }
@@ -257,7 +257,11 @@ function App() {
           })}
           style={{ opacity: isPlaying.value ? 0 : 100 }}
         ></div>
-        <div class="flex flex-wrap gap-2 items-center justify-center">
+        <div
+          className={classnames("flex", "flex-wrap", "gap-2", "items-center", "justify-center", {
+            "gap-y-8": Object.values(bestTimeRecords.value).some((x) => x > 0),
+          })}
+        >
           {DIFFICULTIES.map((d) => (
             <div class="relative">
               <button
@@ -278,7 +282,6 @@ function App() {
                     "outline-4 shadow-md": difficulty.value === d,
                   }
                 )}
-                disabled={isPlaying.value}
                 onClick={(e) => {
                   e.stopPropagation();
                   difficulty.value = d;
@@ -287,7 +290,9 @@ function App() {
                 {d}
               </button>
               {bestTimeRecords.value[d] !== null && (
-                <div class="absolute top-full w-full text-center">{(bestTimeRecords.value[d] / 1000).toFixed(3)} s</div>
+                <div class="absolute top-full mt-1 w-full text-center">
+                  {(bestTimeRecords.value[d] / 1000).toFixed(3)} s
+                </div>
               )}
             </div>
           ))}
