@@ -129,8 +129,8 @@ function App() {
     dy *= speed / d;
     return { x: dx, y: dy };
   });
-  const catAnimatedStep = useComputed(() => (isPlaying.value ? ~~(lastTickTime.value / 500) % 2 : 0));
-  const mouseAnimatedStep = useComputed(() => (isPlaying.value ? ~~(lastTickTime.value / 750) % 2 : 0));
+  const catAnimatedStep = useComputed(() => (isPlaying.value ? ~~((lastTickTime.value * 1000) / 500) % 2 : 0));
+  const mouseAnimatedStep = useComputed(() => (isPlaying.value ? ~~((lastTickTime.value * 1000) / 750) % 2 : 0));
   const tick = (time: number) => {
     const deltaTime = Math.min(0.033333333, time - lastTickTime.value);
     lastTickTime.value = time;
