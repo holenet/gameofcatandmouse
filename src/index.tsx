@@ -76,7 +76,7 @@ function App() {
           y: (ev.offsetY / size - 0.5) * scale * 2,
         };
       };
-      svgElement.addEventListener("mousemove", mouseMove);
+      window.addEventListener("mousemove", mouseMove);
 
       const touchMove = (ev: TouchEvent) => {
         const svgRect = svgElement.getBoundingClientRect();
@@ -87,12 +87,12 @@ function App() {
         };
       };
 
-      svgElement.addEventListener("touchmove", touchMove);
-      svgElement.addEventListener("touchstart", touchMove);
+      window.addEventListener("touchmove", touchMove);
+      window.addEventListener("touchstart", touchMove);
       return () => {
-        svgElement.removeEventListener("mousemove", mouseMove);
-        svgElement.removeEventListener("touchstart", touchMove);
-        svgElement.removeEventListener("touchmove", touchMove);
+        window.removeEventListener("mousemove", mouseMove);
+        window.removeEventListener("touchstart", touchMove);
+        window.removeEventListener("touchmove", touchMove);
       };
     }
   }, [svgRef]);
@@ -247,10 +247,10 @@ function App() {
           <IntroScene onEnded={() => (showIntro.value = false)} />
         </div>
       )}
-      <div class="text-6xl font-bold mt-12" style={{ fontFamily: "fantasy", textWrap: "balance" }}>
+      <div class="text-6xl font-bold mt-12 shrink-0" style={{ fontFamily: "fantasy", textWrap: "balance" }}>
         Game of Cat and Mouse
       </div>
-      <div class="flex flex-col gap-1">
+      <div class="flex flex-col gap-1 shrink-0">
         <div
           className={classnames("font-bold", "text-3xl", "mt-4", "mb-8", {
             "text-green-500": isMouseWin.value,
