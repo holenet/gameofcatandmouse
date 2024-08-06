@@ -26,12 +26,12 @@ export default function IntroScene({ onEnded }) {
         <source src={`${BASE_URL}/intro.mp4`} type="video/mp4" />
       </video>
       <button
-        class="absolute left-1 bottom-0 p-2 text-white opacity-75 hover:opacity-100"
+        class="absolute left-1 bottom-0 p-2 text-white opacity-75 hover:opacity-100 text-lg"
         onClick={() => (isMuted.value = !isMuted.value)}
       >
         {isMuted.value ? <i class="fa-solid fa-volume-xmark" /> : <i class="fa-solid fa-volume-high"></i>}
       </button>
-      <button class="absolute right-1 bottom-0 p-2 text-white opacity-75 hover:opacity-100" onClick={onEnded}>
+      <button class="absolute right-1 bottom-0 p-2 text-white opacity-75 hover:opacity-100 text-lg" onClick={onEnded}>
         SKIP <i class="fa-solid fa-forward"></i>
       </button>
     </div>
