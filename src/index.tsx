@@ -121,7 +121,7 @@ function App() {
   const mouseWinOffset = useComputed(() => {
     if (isPlaying.value || !isMouseWin.value) return { x: 0, y: 0 };
     const timeElapsed = lastTickTime.value - lastStartTime.value - lastTimeRecord.value;
-    const speed = (timeElapsed / 1000) * 3;
+    const speed = timeElapsed * 3;
     let dx = mouseCoord.value.x - catCoord.value.x;
     let dy = mouseCoord.value.y - catCoord.value.y;
     const d = Math.hypot(dx, dy);
@@ -132,7 +132,7 @@ function App() {
   const catAnimatedStep = useComputed(() => (isPlaying.value ? ~~(lastTickTime.value / 500) % 2 : 0));
   const mouseAnimatedStep = useComputed(() => (isPlaying.value ? ~~(lastTickTime.value / 750) % 2 : 0));
   const tick = (time: number) => {
-    const deltaTime = Math.min(0.033333333, (time - lastTickTime.value) / 1000);
+    const deltaTime = Math.min(0.033333333, time - lastTickTime.value);
     lastTickTime.value = time;
 
     if (!isPlaying.value) return;
@@ -177,12 +177,13 @@ function App() {
       isMouseWin.value = mouseWin;
       isPlaying.value = false;
       if (mouseWin) {
+        const prevRadius = Math.hypot(prevCoord.x, prevCoord.y);
+        const currRadius = Math.hypot(mouseCoord.value.x, mouseCoord.value.y);
+        const recordTime = lastTimeRecord.value + (deltaTime * (1 - prevRadius)) / (currRadius - prevRadius);
+        lastTimeRecord.value = recordTime;
         bestTimeRecords.value = {
           ...bestTimeRecords.value,
-          [difficulty.value]: Math.min(
-            bestTimeRecords.value[difficulty.value] ?? Number.MAX_SAFE_INTEGER,
-            lastTimeRecord.value
-          ),
+          [difficulty.value]: Math.min(bestTimeRecords.value[difficulty.value] ?? Number.MAX_SAFE_INTEGER, recordTime),
         };
         mouseFacing.value = Math.atan2(mouseCoord.value.y - catCoord.value.y, mouseCoord.value.x - catCoord.value.x);
       }
@@ -192,7 +193,7 @@ function App() {
   useEffect(() => {
     let lastAnimFunc = 0;
     const anim = (time: number) => {
-      tick(time);
+      tick(time / 1000);
       lastAnimFunc = requestAnimationFrame(anim);
     };
     anim(0);
@@ -290,16 +291,12 @@ function App() {
                 {d}
               </button>
               {bestTimeRecords.value[d] !== null && (
-                <div class="absolute top-full mt-1 w-full text-center">
-                  {(bestTimeRecords.value[d] / 1000).toFixed(3)} s
-                </div>
+                <div class="absolute top-full mt-1 w-full text-center">{bestTimeRecords.value[d].toFixed(3)} s</div>
               )}
             </div>
           ))}
         </div>
-        <div className={classnames("mt-6", { "opacity-0": isFirst.value })}>
-          {(lastTimeRecord.value / 1000).toFixed(3)} s
-        </div>
+        <div className={classnames("mt-6", { "opacity-0": isFirst.value })}>{lastTimeRecord.value.toFixed(3)} s</div>
       </div>
       <div class="grow shrink basis-0 relative">
         <div class="w-full h-full relative overflow-hidden" ref={svgContainerRef}>
