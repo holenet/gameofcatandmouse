@@ -248,12 +248,15 @@ function App() {
           <IntroScene onEnded={() => (showIntro.value = false)} />
         </div>
       )}
-      <div class="text-6xl font-bold mt-12 shrink-0" style={{ fontFamily: "fantasy", textWrap: "balance" }}>
+      <div
+        class="text-6xl font-bold mt-12 shrink-0 tracking-tight"
+        style={{ textWrap: "balance", "-webkit-text-stroke": "1px var(--text-color)" }}
+      >
         Game of Cat and Mouse
       </div>
       <div class="flex flex-col gap-1 shrink-0">
         <div
-          className={classnames("mt-12", "flex", "flex-wrap", "gap-2", "items-center", "justify-center", {
+          className={classnames("mt-4", "flex", "flex-wrap", "gap-2", "items-center", "justify-center", {
             "gap-y-8": Object.values(bestTimeRecords.value).some((x) => x > 0),
           })}
         >
@@ -265,10 +268,13 @@ function App() {
                   "outline-2",
                   "hover:bg-neutral-100",
                   "px-2",
-                  "py-0.5",
+                  "pt-1",
                   "min-w-28",
                   "rounded-sm",
                   "font-semibold",
+                  "flex",
+                  "items-center",
+                  "justify-center",
                   {
                     "outline-green-300 text-green-500": d === "Easy",
                     "outline-orange-300 text-orange-500": d === "Hard",
@@ -308,7 +314,15 @@ function App() {
                 <stop offset="100%" stop-color="#DEF" />
               </radialGradient>
             </defs>
-            <circle cx={0} cy={0} r={1} stroke={"#CCC"} stroke-width={0.005} fill="url(#RadialGradient1)" />
+            <circle
+              cx={0}
+              cy={0}
+              r={1}
+              stroke="#ACF"
+              stroke-width={0.01}
+              fill="url(#RadialGradient1)"
+              style="filter: drop-shadow(0 0 0.05px rgba(0, 0, 0, 0.1))"
+            />
             {showHint.value && (
               <>
                 <circle cx={0} cy={0} r={0.25} stroke={"#CCC5"} stroke-width={0.005} fill={"#FDF7"} />
@@ -405,12 +419,13 @@ function App() {
                   alignment-baseline="baseline"
                   y="0.07"
                   font-weight="bold"
-                  stroke="white"
+                  fill="transparent"
+                  stroke={isFirst.value ? "#333" : isMouseWin.value ? "#3D6" : "#F33"}
                   stroke-width={0.02}
                   style="
                     user-select: none;
                     pointer-events: none;
-                    filter: drop-shadow(0 0 0.02px rgba(0, 0, 0, 0.2));
+                    filter: drop-shadow(0 0 0.02px rgba(255, 255, 255, 0.5));
                   "
                 >
                   {firstMessage}
@@ -421,12 +436,12 @@ function App() {
                   alignment-baseline="baseline"
                   y="0.07"
                   font-weight="bold"
-                  fill={isFirst.value ? "#333" : isMouseWin.value ? "#3D6" : "#F33"}
-                  stroke="transparent"
+                  fill="white"
+                  stroke="white"
+                  stroke-width={0.0}
                   style="
                     user-select: none;
                     pointer-events: none;
-                    filter: drop-shadow(0 0 0.01px rgb(255, 255, 255));
                   "
                 >
                   {firstMessage}
@@ -436,14 +451,11 @@ function App() {
           </svg>
         </div>
       </div>
-      <div class="absolute left-1 right-1 bottom-1 flex items-end justify-between">
-        <a
-          href="https://github.com/holenet/gameofcatandmouse"
-          class="p-1 ml-0.5 opacity-50 hover:opacity-100 text-2xl text-neutral-800"
-        >
+      <div class="absolute left-0 right-0 bottom-0 flex items-end justify-between">
+        <a href="https://github.com/holenet/gameofcatandmouse" class="p-1 px-3 opacity-50 hover:opacity-80 text-2xl">
           <i class="fa-brands fa-square-github"></i>
         </a>
-        <span class="p-1 select-none text-sm opacity-50 hover:opacity-100" style="filter: invert(100%)">
+        <span class="p-1 px-2 select-none text-sm opacity-40 hover:opacity-100" style="filter: invert(100%)">
           Special Thanks to Lucas Kang (<a href="https://www.instagram.com/kangye_easteregg">@kangye_easteregg</a>)
         </span>
       </div>

@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "GangwonEdu_OTFBoldA";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -9,12 +16,17 @@
 
   color: #222;
   background-color: #ffffff;
+  --text-color: #222;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+* {
+  font-family: "GangwonEdu_OTFBoldA";
 }
 
 body {
@@ -41,5 +53,6 @@ body,
   :root {
     color: #ccc;
     background-color: #1a1a1a;
+    --text-color: #ccc;
   }
 }

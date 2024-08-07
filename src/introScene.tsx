@@ -36,13 +36,13 @@ export default function IntroScene({ onEnded }) {
       {isLoaded.value && (
         <>
           <button
-            class="absolute left-1 bottom-0 p-2 text-white opacity-75 hover:opacity-100 text-lg"
+            class="absolute left-0 bottom-0 p-2 px-4 text-white opacity-75 hover:opacity-100 text-lg"
             onClick={() => (isMuted.value = !isMuted.value)}
           >
             {isMuted.value ? <i class="fa-solid fa-volume-xmark" /> : <i class="fa-solid fa-volume-high"></i>}
           </button>
           <button
-            class="absolute right-1 bottom-0 p-2 text-white opacity-75 hover:opacity-100 text-lg"
+            class="absolute right-0 bottom-0 p-2 px-4 text-white opacity-75 hover:opacity-100 text-lg"
             onClick={onEnded}
           >
             SKIP <i class="fa-solid fa-forward"></i>
