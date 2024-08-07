@@ -12,7 +12,11 @@ export default function IntroScene({ onEnded }) {
     const videoElement = videoRef.current;
     if (videoElement) {
       videoElement.play();
+      if (videoElement.readyState === HTMLMediaElement.HAVE_ENOUGH_DATA) {
+        isLoaded.value = true;
+      } else {
       videoElement.addEventListener("loadeddata", () => (isLoaded.value = true));
+      }
     }
   }, []);
 

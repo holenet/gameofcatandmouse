@@ -70,13 +70,13 @@ function App() {
     const svgElement = svgRef.current;
     if (svgElement) {
       const mouseMove = (ev: MouseEvent) => {
-        const size = svgElement.getBoundingClientRect().width;
+        const svgRect = svgElement.getBoundingClientRect();
+        const size = svgRect.width;
         targetCoord.value = {
-          x: (ev.offsetX / size - 0.5) * scale * 2,
-          y: (ev.offsetY / size - 0.5) * scale * 2,
+          x: ((ev.clientX - svgRect.x) / size - 0.5) * scale * 2,
+          y: ((ev.clientY - svgRect.y) / size - 0.5) * scale * 2,
         };
       };
-      window.addEventListener("mousemove", mouseMove);
 
       const touchMove = (ev: TouchEvent) => {
         const svgRect = svgElement.getBoundingClientRect();
@@ -87,6 +87,7 @@ function App() {
         };
       };
 
+      window.addEventListener("mousemove", mouseMove);
       window.addEventListener("touchmove", touchMove);
       window.addEventListener("touchstart", touchMove);
       return () => {
@@ -252,14 +253,7 @@ function App() {
       </div>
       <div class="flex flex-col gap-1 shrink-0">
         <div
-          className={classnames("font-bold", "text-3xl", "mt-4", "mb-8", {
-            "text-green-500": isMouseWin.value,
-            "text-red-500": !isMouseWin.value,
-          })}
-          style={{ opacity: isPlaying.value ? 0 : 100 }}
-        ></div>
-        <div
-          className={classnames("flex", "flex-wrap", "gap-2", "items-center", "justify-center", {
+          className={classnames("mt-12", "flex", "flex-wrap", "gap-2", "items-center", "justify-center", {
             "gap-y-8": Object.values(bestTimeRecords.value).some((x) => x > 0),
           })}
         >
@@ -383,6 +377,26 @@ function App() {
                 </g>
               </g>
             </g>
+            {showHint.value && (
+              <g opacity={0.5}>
+                <line
+                  x1={targetCoord.value.x - 0.03}
+                  y1={targetCoord.value.y}
+                  x2={targetCoord.value.x + 0.03}
+                  y2={targetCoord.value.y}
+                  stroke="red"
+                  stroke-width={0.007}
+                />
+                <line
+                  x1={targetCoord.value.x}
+                  y1={targetCoord.value.y - 0.03}
+                  x2={targetCoord.value.x}
+                  y2={targetCoord.value.y + 0.03}
+                  stroke="red"
+                  stroke-width={0.007}
+                />
+              </g>
+            )}
             {!isPlaying.value && (
               <>
                 <text
