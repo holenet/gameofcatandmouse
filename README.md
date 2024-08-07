@@ -1,15 +1,18 @@
-# `create-preact`
+# Game of Cat and Mouse
 
-<h2 align="center">
-  <img height="256" width="256" src="./src/assets/preact.svg">
-</h2>
+This is a **Playable** implementation of the _Game of Cat and Mouse_ described on YouTube [Game of Cat and Mouse - Numberphile](https://youtu.be/vF_-ob9vseM?si=SchSmNfHrSd1WViD)
 
-<h3 align="center">Get started using Preact and Vite!</h3>
+> Playable Link: https://holenet.github.io/gameofcatandmouse/ (Deployed by Github Pages)
 
-## Getting Started
+## Difficulties
 
--   `npm run dev` - Starts a dev server at http://localhost:5173/
+You can play the game with multiple difficulties.
 
--   `npm run build` - Builds for production, emitting to `dist/`
+1. Easy(4.0): This is the same difficulty which was covered in the video.
+2. Hard(4.2)
+3. Very Hard(4.4)
+4. Impossible(4.5)
 
--   `npm run preview` - Starts a server at http://localhost:4173/ to test production build locally
+## Special Thanks
+
+- Assets(Image/Animation) - Lucas Kang ([@kangye_easteregg](https://www.instagram.com/kangye_easteregg))

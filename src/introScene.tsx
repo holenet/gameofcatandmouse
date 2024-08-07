@@ -15,7 +15,7 @@ export default function IntroScene({ onEnded }) {
       if (videoElement.readyState === HTMLMediaElement.HAVE_ENOUGH_DATA) {
         isLoaded.value = true;
       } else {
-      videoElement.addEventListener("loadeddata", () => (isLoaded.value = true));
+        videoElement.addEventListener("loadeddata", () => (isLoaded.value = true));
       }
     }
   }, []);

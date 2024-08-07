@@ -436,11 +436,16 @@ function App() {
           </svg>
         </div>
       </div>
-      <div
-        class="absolute right-1 bottom-1 select-none pointer-events-none font-bold opacity-25"
-        style="filter: invert(100%)"
-      >
-        Special Thanks to Lucas Kang
+      <div class="absolute left-1 right-1 bottom-1 flex items-end justify-between">
+        <a
+          href="https://github.com/holenet/gameofcatandmouse"
+          class="p-1 ml-0.5 opacity-50 hover:opacity-100 text-2xl text-neutral-800"
+        >
+          <i class="fa-brands fa-square-github"></i>
+        </a>
+        <span class="p-1 select-none text-sm opacity-50 hover:opacity-100" style="filter: invert(100%)">
+          Special Thanks to Lucas Kang (<a href="https://www.instagram.com/kangye_easteregg">@kangye_easteregg</a>)
+        </span>
       </div>
     </div>
   );
